@@ -344,6 +344,9 @@ type_instance_init (GTypeInstance *instance,
 
     gst_pad_set_setcaps_function (omx_base->sinkpad, sink_setcaps);
 
+    g_free (omx_base->omx_library);
+    omx_base->omx_library = g_strdup ("libOMX_Core.so");
+
     self->bitrate = DEFAULT_BITRATE;
 }
 
