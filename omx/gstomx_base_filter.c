@@ -26,7 +26,7 @@
 #include <stdlib.h> /* For calloc, free */
 #include <string.h> /* For memcpy */
 
-static gboolean share_input_buffer = FALSE;
+static gboolean share_input_buffer = TRUE;
 
 enum
 {
@@ -781,6 +781,7 @@ type_instance_init (GTypeInstance *instance,
     GST_LOG_OBJECT (self, "begin");
 
     self->use_timestamps = TRUE;
+    self->share_output_buffer = TRUE;
 
     /* GOmx */
     {
