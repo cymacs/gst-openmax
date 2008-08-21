@@ -288,6 +288,13 @@ omx_setup (GstOmxBaseFilter *omx_base)
 
             OMX_SetParameter (gomx->omx_handle, OMX_IndexParamPortDefinition, param);
         }
+
+        if (omx_base->enable_stream_mode)
+        {
+            OMX_INDEXTYPE index;
+            OMX_GetExtensionIndex (gomx->omx_handle, "OMX.TI.VideoDecode.Param.ProcessMode", &index);
+            OMX_SetParameter (gomx->omx_handle, index, GINT_TO_POINTER (1));
+        }
 #endif
 
         free (param);

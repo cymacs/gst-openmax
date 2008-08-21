@@ -34,6 +34,7 @@ enum
     ARG_COMPONENT_NAME,
     ARG_LIBRARY_NAME,
     ARG_USE_TIMESTAMPS,
+    ARG_ENABLE_STREAM_MODE,
 };
 
 static GstElementClass *parent_class = NULL;
@@ -180,6 +181,9 @@ set_property (GObject *obj,
         case ARG_USE_TIMESTAMPS:
             self->use_timestamps = g_value_get_boolean (value);
             break;
+        case ARG_ENABLE_STREAM_MODE:
+            self->enable_stream_mode = g_value_get_boolean (value);
+            break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (obj, prop_id, pspec);
             break;
@@ -206,6 +210,9 @@ get_property (GObject *obj,
             break;
         case ARG_USE_TIMESTAMPS:
             g_value_set_boolean (value, self->use_timestamps);
+            break;
+        case ARG_ENABLE_STREAM_MODE:
+            g_value_set_boolean (value, self->enable_stream_mode);
             break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (obj, prop_id, pspec);
@@ -247,6 +254,11 @@ type_class_init (gpointer g_class,
                                          g_param_spec_boolean ("use-timestamps", "Use timestamps",
                                                                "Whether or not to use timestamps",
                                                                TRUE, G_PARAM_READWRITE));
+
+        g_object_class_install_property (gobject_class, ARG_ENABLE_STREAM_MODE,
+                                         g_param_spec_boolean ("enable-stream-mode", "Enable stream-mode",
+                                                               "Enables stream-mode (TI specific)",
+                                                               FALSE, G_PARAM_READWRITE));
     }
 }
 
